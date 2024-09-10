@@ -14,7 +14,7 @@ let brightness = 100, saturation = 100, inversion = 0, grayscale = 0;
 let rotate = 0, fliphorizontal = 1, flipvertical = 1;
 
 const applyfilter = () => {
-    previewimg.style.transform = `rotate(${rotate}deg) scale(${flipvertical},${fliphorizontal})`;
+    previewimg.style.transform = `rotate(${rotate}deg) scale(${fliphorizontal},${flipvertical})`;
     previewimg.style.filter=`brightness(${brightness}%) saturate(${saturation}%) invert(${inversion}%) grayscale(${grayscale}%) `
 }
 
@@ -23,6 +23,7 @@ const loadimage = () => {
     if (!file) return; // return if user has not selected file
     previewimg.src = URL.createObjectURL(file); // passing file URL as preview img src
     previewimg.addEventListener("load", () => {
+        resetfilterbtn.click(); //clicking reset btn, so the filter value reset if the user select new img
         document.querySelector(".container").classList.remove("disable");
     });
 }
@@ -96,22 +97,26 @@ const resetfilter = () => { //reset all value to previous ones
     applyfilter();
 }
  
-const saveimg=() => {
+const saveimg = () => {
     const canvas = document.createElement("canvas"); //creating canvas element
     const ctx = canvas.getContext("2d");//canvas.getcontext return a drawing context on the canvas
     canvas.width = previewimg.naturalWidth;//setting canvas width to actual image width
     canvas.height = previewimg.naturalHeight;//setting canvas height to actual image height
 
     //applying user selected filters to canvas filter
-    ctx.filter=`brightness(${brightness}%) saturate(${saturation}%) invert(${inversion}%) grayscale(${grayscale}%)`
+    ctx.filter = `brightness(${brightness}%) saturate(${saturation}%) invert(${inversion}%) grayscale(${grayscale}%)`
     ctx.translate(canvas.width / 2, canvas.height / 2); //translating canvas from center
     if (rotate !== 0) { //if rotate value is not 0, rotate the canvas
         ctx.rotate(rotate * Math.PI / 180);
     }
     ctx.scale(fliphorizontal, flipvertical); //flip canvas ,horizontally/vertically
-    ctx.drawImage(previewimg, -canvas.width/2,canvas.height/2 , canvas.width, canvas.height);
-    document.body.appendChild(canvas);
-}
+    ctx.drawImage(previewimg, -canvas.width / 2,-canvas.height / 2, canvas.width, canvas.height);
+    
+    const link = document.createElement("a"); //creating <a> element
+    link.download = "image.jpg"; //passing <a> tag download value to "image.jpg"
+    link.href = canvas.toDataURL("image/jpeg");//passing <a> tag href value to canvas data URL
+    link.click();//clicking <a> tag so the image download
+};
 
 fileinput.addEventListener("change", loadimage);
 filterslider.addEventListener("input", updatefilter);
