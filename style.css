@@ -121,6 +121,7 @@ body{
     margin-left: 20px;
     flex-grow: 1;
     display: flex;
+    overflow: hidden;
     align-items: center;
     justify-content: center;
 }

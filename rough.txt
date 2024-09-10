@@ -1,6 +1,0 @@
-//start from 22 min 
-//https://www.youtube.com/watch?v=YqUUvBpCtfA&t=2s
-
-https://codingnepalweb.com/demos/image-editor-javascript/image-placeholder.svg
-https://codingnepalweb.com/demos/image-editor-javascript/#google_vignette
-https://www.codingnepalweb.com/build-image-editor-html-javascript/
