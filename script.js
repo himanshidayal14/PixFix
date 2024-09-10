@@ -97,7 +97,13 @@ const resetfilter = () => { //reset all value to previous ones
 }
  
 const saveimg=() => {
-    
+    const canvas = document.createElement("canvas"); //creating canvas element
+    const ctx = canvas.getContext("2d");//canvas.getcontext return a drawing context on the canvas
+    canvas.width = previewimg.naturalWidth;//setting canvas width to actual image width
+    canvas.height = previewimg.naturalHeight;//setting canvas height to actual image height
+
+    ctx.drawImage(previewimg, 0, 0, canvas.width, canvas.height);
+    document.body.appendChild(canvas);
 }
 
 fileinput.addEventListener("change", loadimage);
