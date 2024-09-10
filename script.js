@@ -106,7 +106,7 @@ const saveimg=() => {
     ctx.filter=`brightness(${brightness}%) saturate(${saturation}%) invert(${inversion}%) grayscale(${grayscale}%)`
     ctx.translate(canvas.width / 2, canvas.height / 2); //translating canvas from center
     if (rotate !== 0) { //if rotate value is not 0, rotate the canvas
-        
+        ctx.rotate(rotate * Math.PI / 180);
     }
     ctx.scale(fliphorizontal, flipvertical); //flip canvas ,horizontally/vertically
     ctx.drawImage(previewimg, -canvas.width/2,canvas.height/2 , canvas.width, canvas.height);
