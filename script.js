@@ -102,6 +102,8 @@ const saveimg=() => {
     canvas.width = previewimg.naturalWidth;//setting canvas width to actual image width
     canvas.height = previewimg.naturalHeight;//setting canvas height to actual image height
 
+    //applying user selected filters to canvas filter
+    ctx.filter=`brightness(${brightness}%) saturate(${saturation}%) invert(${inversion}%) grayscale(${grayscale}%)`
     ctx.drawImage(previewimg, 0, 0, canvas.width, canvas.height);
     document.body.appendChild(canvas);
 }
