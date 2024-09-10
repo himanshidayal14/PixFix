@@ -104,7 +104,12 @@ const saveimg=() => {
 
     //applying user selected filters to canvas filter
     ctx.filter=`brightness(${brightness}%) saturate(${saturation}%) invert(${inversion}%) grayscale(${grayscale}%)`
-    ctx.drawImage(previewimg, 0, 0, canvas.width, canvas.height);
+    ctx.translate(canvas.width / 2, canvas.height / 2); //translating canvas from center
+    if (rotate !== 0) { //if rotate value is not 0, rotate the canvas
+        
+    }
+    ctx.scale(fliphorizontal, flipvertical); //flip canvas ,horizontally/vertically
+    ctx.drawImage(previewimg, -canvas.width/2,canvas.height/2 , canvas.width, canvas.height);
     document.body.appendChild(canvas);
 }
 
